@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>你肯定不知道我今天怎么这么开心</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css"/>
+</head>
+<body>
+<div class="eim">
+    <div class="sidebar">
+        <div class="header">
+            <h1>Eim</h1>
+            <div class="quote">
+                <p class="quote-text animate-init">不思量 自难忘</p>
+            </div>
+        </div>
+		<div class="menu">
+            <a href="https://github.com/eieme" class="animate-init">GitHub</a>
+            <a href="http://blog.eieme.com" class="animate-init">Blog</a>
+            <a href="http://weibo.com/123020083" class="animate-init">WeiBo</a>
+            <p>
+                <a href="http://eieme.com" class="animate-init">
+                    奥义·复制粘贴加调试
+                </a>
+            </p>
+        </div>
+		<div class="location">
+            <i class="location-icon"></i>
+            <span class="location-text animate-init">ShiJiaZhuang - China</span>
+        </div>
+        <div class="relocating">
+            Navigating to: <span class="relocate-location"></span>...
+        </div>
+    </div>
+
+    <div class="content">
+        <span class="close">close</span>
+    </div>
+</div>
+<script type="text/javascript" src="assets/vendors/jquery/index.js"></script>
+<script>
+    $(document).ready(function () {
+        var delay = 1;
+        var DELAY_STEP = 200;
+        var animationOptions = { opacity: 1, top: 0};
+
+        $('h1').animate(animationOptions).promise()
+                .pipe(animateMain)
+                .pipe(animateLocationIcon);
+
+        function animateMain() {
+            var dfd = $.Deferred();
+            var els = $('.animate-init');
+            var size = els.size();
+
+            els.each(function (index, el) {
+                delay++;
+                $(el).delay(index * DELAY_STEP)
+                        .animate(animationOptions);
+                (size - 1 === index) && dfd.resolve();
+            });
+            return dfd.promise();
+        }
+
+        function animateLocationIcon() {
+            $('.location-icon').delay(delay * DELAY_STEP).animate({
+                opacity: 1,
+                top: 0
+            }).promise().done(animationQuote);
+        }
+
+        function animationQuote() {}
+
+        $(document.body).on('keydown', function (event) {
+            // Press 'b' key
+            if (event.which === 66) {
+                $('.relocate-location').text('Bookmark Page');
+                $('.relocating').css('opacity', 1);
+
+                window.setTimeout(function () {
+                    window.location.href = '/bookmarks.html';
+                }, 1000);
+            }
+        });
+    });
+</script>
+</body>
+</html>
