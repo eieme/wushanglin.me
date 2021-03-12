@@ -175,3 +175,12 @@ ul, ol {
 }
 
 .hidden { display: none; }
+
+.beian {
+    bottom: 0px;
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    width: 100%;
+}
